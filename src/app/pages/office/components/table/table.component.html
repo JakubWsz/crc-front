@@ -1,0 +1,26 @@
+<table mat-table [dataSource]="officeList" class="table">
+
+  <ng-container matColumnDef="streetAddress">
+    <th mat-header-cell *matHeaderCellDef> Ulica</th>
+    <td mat-cell *matCellDef="let element"> {{element.addressDTO.streetAddress}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="postalCode">
+    <th mat-header-cell *matHeaderCellDef> Kod pocztowy</th>
+    <td mat-cell *matCellDef="let element"> {{element.addressDTO.postalCode}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cityName">
+    <th mat-header-cell *matHeaderCellDef> Miasto</th>
+    <td mat-cell *matCellDef="let element"> {{element.addressDTO.cityName}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="officeCEO">
+    <th mat-header-cell *matHeaderCellDef> Dyrektor</th>
+    <td mat-cell *matCellDef="let element"> {{element.officeCEO}} </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

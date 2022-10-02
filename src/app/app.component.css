@@ -1,0 +1,10 @@
+.app-container{
+  min-height: 100vh;
+}
+
+.sidenav-content{
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+

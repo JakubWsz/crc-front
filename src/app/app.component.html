@@ -1,0 +1,20 @@
+<mat-drawer-container class="app-container" autosize>
+  <mat-drawer #drawer class="sidenav" mode="side">
+  <app-sidenav></app-sidenav>
+    </mat-drawer>
+
+  <div class="sidenav-content">
+
+    <mat-toolbar color="primary">
+      <button mat-icon-button  (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>TwojaFura</span>
+
+    </mat-toolbar>
+
+    <router-outlet></router-outlet>
+
+  </div>
+
+</mat-drawer-container>
