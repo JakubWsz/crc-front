@@ -10,7 +10,7 @@ import {Subject, takeUntil} from "rxjs";
 })
 export class TableComponent implements OnInit, OnDestroy {
   officeList!: OfficeInterface[];
-  displayedColumns: string[] = ['streetAddress', 'postalCode', 'cityName', 'officeCEO'];
+  displayedColumns: string[] = ['streetAddress', 'postalCode', 'cityName', 'officeCEO', 'actions'];
   unsubscribe$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private officeService: OfficeService) {
