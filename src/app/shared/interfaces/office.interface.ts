@@ -1,6 +1,6 @@
-export interface OfficeInterface{
+export interface OfficeInterface {
 
-  id:string;
+  id: string;
   "addressDTO": {
     streetAddress: string;
     "postalCode": string;

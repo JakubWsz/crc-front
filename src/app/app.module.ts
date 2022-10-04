@@ -9,18 +9,20 @@ import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {MatSidenavModule} from "@angular/material/sidenav";
-import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
+import {SidenavComponent} from './shared/components/sidenav/sidenav.component';
 import {MatListModule} from "@angular/material/list";
 import {RouterModule} from "@angular/router";
 import {RouterTestingModule} from "@angular/router/testing";
-import { HomeComponent } from './pages/home/home.component';
-import { OfficeComponent } from './pages/office/office.component';
+import {HomeComponent} from './pages/home/home.component';
+import {OfficeComponent} from './pages/office/office.component';
 import {AppRoutingModule} from "./app-routing.module";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from '@angular/material/card';
-import { TableComponent } from './pages/office/components/table/table.component';
+import {TableComponent} from './pages/office/components/table/table.component';
 import {MatTableModule} from "@angular/material/table";
+import {EditButtonComponent} from './shared/components/buttons/edit/edit.button.component';
+import { DeleteComponent } from './shared/components/buttons/delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import {MatTableModule} from "@angular/material/table";
     HomeComponent,
     OfficeComponent,
     TableComponent,
+    EditButtonComponent,
+    DeleteComponent,
   ],
   imports: [
     BrowserModule,
