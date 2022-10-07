@@ -21,8 +21,6 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from '@angular/material/card';
 import {TableComponent} from './pages/office/components/table/table.component';
 import {MatTableModule} from "@angular/material/table";
-import {EditButtonComponent} from './shared/components/buttons/edit/edit.button.component';
-import { DeleteComponent } from './shared/components/buttons/delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -30,9 +28,7 @@ import { DeleteComponent } from './shared/components/buttons/delete/delete.compo
     SidenavComponent,
     HomeComponent,
     OfficeComponent,
-    TableComponent,
-    EditButtonComponent,
-    DeleteComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,

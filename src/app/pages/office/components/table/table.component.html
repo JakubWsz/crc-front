@@ -24,8 +24,8 @@
     <th mat-header-cell *matHeaderCellDef>Działania</th>
     <td mat-cell *matCellDef="let element">
       <div class="flex-container">
-      <edit-button></edit-button>
-      <delete-button></delete-button>
+        <button mat-stroked-button type="button" class="btn red" (click)="deleteOffice(element.id)">Usuń</button>
+        <button mat-button>Usuń</button>
       </div>
     </td>
   </ng-container>
