@@ -1,0 +1,65 @@
+<h1>{{submitOffice}}</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Ulica i numer budynku</mat-label>
+      <input type="text" matInput formControlName="streetAddress" placeholder="np. Wierzbowa 12">
+      <!--        <mat-hint>hint</mat-hint>-->
+      <mat-error *ngIf="!form.hasError('required') ">
+        {{contentRequiredAlert}}
+      </mat-error>
+      <!--        <mat-error *ngIf="emailFormControl.hasError('required')">-->
+      <!--          Email is <strong>required</strong>-->
+      <!--        </mat-error>-->
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Kod pocztowy</mat-label>
+      <input type="text" matInput formControlName="postalCode" placeholder="np. 12-345">
+      <!--        <mat-hint>hint</mat-hint>-->
+      <mat-error *ngIf="!form.hasError('required') ">
+        {{contentRequiredAlert}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Miasto</mat-label>
+      <input type="text" matInput formControlName="cityName" placeholder="np. Warszawa">
+      <!--        <mat-hint>hint</mat-hint>-->
+      <mat-error *ngIf="!form.hasError('required') ">
+        {{contentRequiredAlert}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Adres strony internetowej</mat-label>
+      <input type="text" matInput formControlName="websiteUrl" placeholder="np. www.twojafura.pl/Warszawa">
+      <!--        <mat-hint>hint</mat-hint>-->
+      <mat-error *ngIf="!form.hasError('required') ">
+        {{contentRequiredAlert}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>Manager</mat-label>
+      <input type="text" matInput formControlName="officeCeo" placeholder="np. Jan Kowalski">
+      <!--        <mat-hint>hint</mat-hint>-->
+      <mat-error *ngIf="!form.hasError('required') ">
+        {{contentRequiredAlert}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <button mat-stroked-button type="submit" class="btn col s2 offset-s10"
+          [disabled]="isDisabled()">{{submitOffice}}</button>
+  <button mat-stroked-button type="button" class="btn red" (click)="cleanForm()">{{clean}}</button>
+</form>

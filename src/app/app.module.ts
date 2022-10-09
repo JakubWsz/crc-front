@@ -21,6 +21,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from '@angular/material/card';
 import {TableComponent} from './pages/office/components/table/table.component';
 import {MatTableModule} from "@angular/material/table";
+import { AddUpdateFormComponent } from './pages/office/components/add-update-form/add-update-form.component';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import {MatTableModule} from "@angular/material/table";
     SidenavComponent,
     HomeComponent,
     OfficeComponent,
-    TableComponent
+    TableComponent,
+    AddUpdateFormComponent
   ],
   imports: [
     BrowserModule,
@@ -47,7 +50,8 @@ import {MatTableModule} from "@angular/material/table";
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
