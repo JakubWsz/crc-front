@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
-import {OfficeService} from "../../../../shared/services/office.service";
+import {OfficeService} from "../../../../store/office/office.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {CreateOfficeRequest} from "../../../../shared/interfaces/create.office.request.interfce";

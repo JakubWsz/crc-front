@@ -2,9 +2,9 @@ import {Injectable} from "@angular/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {Observable} from "rxjs";
-import {OfficeInterface} from "../interfaces/office.interface";
-import {CreateOfficeRequest} from "../interfaces/create.office.request.interfce";
-import {UpdateRequestInterface} from "../interfaces/UpdateRequestInterface";
+import {OfficeInterface} from "../../shared/interfaces/office.interface";
+import {CreateOfficeRequest} from "../../shared/interfaces/create.office.request.interfce";
+import {UpdateRequestInterface} from "../../shared/interfaces/UpdateRequestInterface";
 
 @Injectable({
   providedIn: "root"

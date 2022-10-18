@@ -1,11 +1,12 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {OfficeService} from "../../../../shared/services/office.service";
+import {OfficeService} from "../../../../store/office/office.service";
 import {OfficeInterface} from "../../../../shared/interfaces/office.interface";
 import {of, Subject, takeUntil} from "rxjs";
 import {FormBuilder, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {AddUpdateFormComponent} from "../add-update-form/add-update-form.component";
+import {OfficeFacade} from "../../../../store/office/office.facade";
 
 @Component({
   selector: 'app-table',
@@ -26,11 +27,13 @@ export class TableComponent implements OnInit, OnDestroy {
   unsubscribe$: Subject<boolean> = new Subject<boolean>();
 
   constructor(private fb: FormBuilder, private officeService: OfficeService, private _snackBar: MatSnackBar,
-              private dialog: MatDialog) {
+              private dialog: MatDialog, private officeFacade: OfficeFacade) {
   }
 
   ngOnInit(): void {
     this.getOfficeList();
+    this.officeFacade.getOfficeList();
+    this.officeFacade.officeListItems$.subscribe((items) => console.log(items))
   }
 
   ngOnDestroy() {

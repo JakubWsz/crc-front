@@ -21,8 +21,16 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from '@angular/material/card';
 import {TableComponent} from './pages/office/components/table/table.component';
 import {MatTableModule} from "@angular/material/table";
-import { AddUpdateFormComponent } from './pages/office/components/add-update-form/add-update-form.component';
+import {AddUpdateFormComponent} from './pages/office/components/add-update-form/add-update-form.component';
 import {MatDialogModule} from '@angular/material/dialog';
+import {ActionReducerMap, StoreModule} from '@ngrx/store'
+import {appReducers} from "./store/app.reducers";
+import {AppState} from "./store/app.state";
+import {EffectsModule} from "@ngrx/effects";
+import {OfficeEffects} from "./store/office/office.effects";
+import {StoreDevtoolsModule} from "@ngrx/store-devtools";
+import {environment} from "../environments/environment";
+import {OfficeFacade} from "./store/office/office.facade";
 
 @NgModule({
   declarations: [
@@ -51,9 +59,15 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatIconModule,
     MatCardModule,
     MatTableModule,
-    MatDialogModule
+    MatDialogModule,
+    StoreModule.forRoot(appReducers as ActionReducerMap<AppState>),
+    EffectsModule.forRoot([OfficeEffects]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
   ],
-  providers: [],
+  providers: [OfficeFacade],
   bootstrap: [AppComponent]
 })
 export class AppModule {
