@@ -1,16 +1,20 @@
 import {OfficeListInterface} from "./interfaces/office-list.interface";
-import {OfficeInterface} from "../../shared/interfaces/office.interface";
+import {LoadingHandlerInterface} from "../../shared/interfaces/loading-handler.interface";
+import {initialLoadingHandler} from "../../shared/models/initial-loading-handler.model";
 
 export interface OfficeState {
-  list: OfficeListInterface,
-  //add : AddInterface
+  list: OfficeListInterface;
+  add: LoadingHandlerInterface;
+  delete: LoadingHandlerInterface;
+  update: LoadingHandlerInterface;
 }
 
 export const officeInitialState: OfficeState = {
   list: {
     items: [],
-    loading: false,
-    success: false,
-    error: null,
-  }
+    ...initialLoadingHandler
+  },
+  add: initialLoadingHandler,
+  delete: initialLoadingHandler,
+  update: initialLoadingHandler
 }

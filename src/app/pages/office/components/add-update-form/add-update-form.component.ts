@@ -4,6 +4,8 @@ import {OfficeService} from "../../../../store/office/office.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
 import {CreateOfficeRequest} from "../../../../shared/interfaces/create.office.request.interfce";
+import {OfficeFacade} from "../../../../store/office/office.facade";
+import {OfficeAddPayload} from "../../../../store/office/interfaces/office-add-payload.interface";
 
 @Component({
   selector: 'app-add-update-form',
@@ -24,7 +26,7 @@ export class AddUpdateFormComponent implements OnInit {
   clean = 'Wyczyść';
 
   constructor(private fb: FormBuilder, private officeService: OfficeService, private _snackBar: MatSnackBar,
-              @Inject(MAT_DIALOG_DATA) private data: any) {
+              @Inject(MAT_DIALOG_DATA) private data: any, private officeFacade: OfficeFacade) {
   }
 
   get isEdit(): boolean {
@@ -37,7 +39,7 @@ export class AddUpdateFormComponent implements OnInit {
 
   onSubmit(): void {
     const createOfficeRequest: any = {
-      addressDTO: {
+      addressDto: {
         streetAddress: this.form.get('streetAddress')?.value,
         postalCode: this.form.get('postalCode')?.value,
         cityName: this.form.get('cityName')?.value,
@@ -58,10 +60,8 @@ export class AddUpdateFormComponent implements OnInit {
     return this.form.invalid
   }
 
-  addOffice(createOfficeRequest: CreateOfficeRequest): void {
-    this.officeService.addOfficeRequest(createOfficeRequest).subscribe(() => {
-      this._snackBar.open("office created", "OK")
-    });
+  addOffice(addOffice: OfficeAddPayload): void {
+    this.officeFacade.addOffice(addOffice)
   }
 
   editOffice(): void {
