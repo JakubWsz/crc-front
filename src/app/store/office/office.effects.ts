@@ -4,12 +4,12 @@ import {Store} from "@ngrx/store";
 import {OfficeService} from "./office.service";
 import {
   AddOffice, AddOfficeFail,
-  AddOfficeSuccess,
+  AddOfficeSuccess, GetListOffice,
   GetListOfficeFail,
   GetListOfficeSuccess,
   OfficeActionsTypes
 } from "./office.actions";
-import {catchError, map, mergeMap, of, switchMap, tap} from "rxjs";
+import {catchError, map, of, switchMap} from "rxjs";
 import {AppState} from "../app.state";
 
 @Injectable()
@@ -30,15 +30,13 @@ export class OfficeEffects {
   addOffice$ = createEffect(() =>
     this.actions.pipe(
       ofType(OfficeActionsTypes.add),
-      mergeMap((action: AddOffice) =>
+      switchMap((action: AddOffice) =>
         this.officeService.addOfficeRequest(action.payload).pipe(
-          map(response => new AddOfficeSuccess()),
+          switchMap((response) => [
+            new AddOfficeSuccess(),
+            new GetListOffice()
+          ]),
           catchError(error => of(new AddOfficeFail(error)))
-        )),
-      switchMap(() =>
-        this.officeService.getOfficeListRequest().pipe(
-          map(response => new GetListOfficeSuccess(response)),
-          catchError(error => of(new GetListOfficeFail(error)))
         ))
     ))
 }

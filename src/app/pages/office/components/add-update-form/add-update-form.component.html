@@ -60,6 +60,7 @@
   </div>
 
   <button mat-stroked-button type="submit" class="btn col s2 offset-s10"
-          [disabled]="isDisabled()">{{submitOffice}}</button>
-  <button mat-stroked-button type="button" class="btn red" (click)="cleanForm()">{{clean}}</button>
+          [disabled]="isDisabled() || (carAddLoading$ | async)">{{submitOffice}}</button>
+  <button mat-stroked-button type="button" class="btn red" (click)="cleanForm()"
+          [disabled]="(carAddLoading$ | async)">{{clean}}</button>
 </form>
