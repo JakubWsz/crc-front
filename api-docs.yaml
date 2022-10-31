@@ -1,0 +1,1092 @@
+openapi: 3.0.1
+info:
+  title: CarRentalComapany3 API
+  description: CarRentalCompany3 API application
+  version: v0.0.1
+servers:
+- url: http://localhost:9093
+  description: Generated server url
+paths:
+  /office/{id}/update:
+    put:
+      tags:
+      - office-controller
+      operationId: updateOffice
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfficeRequest'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OfficeResponse'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /employee/{id}/update:
+    put:
+      tags:
+      - employee-controller
+      operationId: updateEmployee
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeRequest'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EmployeeResponse'
+        "409":
+          description: Conflict
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /client/{id}/update:
+    put:
+      tags:
+      - client-controller
+      operationId: updateClient
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientRequest'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ClientResponse'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /office/create:
+    post:
+      tags:
+      - office-controller
+      operationId: createOffice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OfficeRequest'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/OfficeResponse'
+  /employee/create:
+    post:
+      tags:
+      - employee-controller
+      operationId: createEmployee
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeeRequest'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/EmployeeResponse'
+  /client/create:
+    post:
+      tags:
+      - client-controller
+      operationId: createClient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClientRequest'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ClientResponse'
+        "409":
+          description: Conflict
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /car/create:
+    post:
+      tags:
+      - car-controller
+      operationId: createCar
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CarRequest'
+        required: true
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CarResponse'
+  /office:
+    get:
+      tags:
+      - office-controller
+      operationId: getFilteredClients
+      parameters:
+      - name: specification
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/OfficeSpecification'
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageOfficeResponse'
+  /employee:
+    get:
+      tags:
+      - employee-controller
+      operationId: getFilteredClients_1
+      parameters:
+      - name: specification
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/EmployeeSpecification'
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageEmployeeResponse'
+  /client:
+    get:
+      tags:
+      - client-controller
+      operationId: getFilteredClients_2
+      parameters:
+      - name: specification
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/ClientSpecification'
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageClientResponse'
+  /car:
+    get:
+      tags:
+      - car-controller
+      operationId: getFilteredCars
+      parameters:
+      - name: specification
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/CarSpecification'
+      - name: pageable
+        in: query
+        required: true
+        schema:
+          $ref: '#/components/schemas/Pageable'
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/PageCarResponse'
+  /car/{id}/:
+    get:
+      tags:
+      - car-controller
+      operationId: getCarById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CarResponse'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /office/{id}/delete:
+    delete:
+      tags:
+      - office-controller
+      operationId: deleteOffice
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+        "409":
+          description: Conflict
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /employee/{id}/delete:
+    delete:
+      tags:
+      - employee-controller
+      operationId: removeEmployee
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+        "409":
+          description: Conflict
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+  /car/{id}/delete:
+    delete:
+      tags:
+      - car-controller
+      operationId: removeCar
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "400":
+          description: Bad Request
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "500":
+          description: Internal Server Error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    AddressDto:
+      required:
+      - cityName
+      - postalCode
+      - streetAddress
+      type: object
+      properties:
+        streetAddress:
+          pattern: "^[A-Za-z-0-9]"
+          type: string
+        postalCode:
+          pattern: "^[0-9]{2}-[0-9]{3}"
+          type: string
+        cityName:
+          type: string
+    OfficeRequest:
+      required:
+      - addressDto
+      - officeCeo
+      - websiteUrl
+      type: object
+      properties:
+        addressDto:
+          $ref: '#/components/schemas/AddressDto'
+        websiteUrl:
+          pattern: "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
+          type: string
+        officeCeo:
+          type: string
+    Error:
+      type: object
+      properties:
+        status:
+          type: integer
+          format: int32
+        message:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+    OfficeResponse:
+      required:
+      - addressDTO
+      - id
+      - officeCEO
+      - websiteURL
+      type: object
+      properties:
+        id:
+          type: string
+        addressDTO:
+          $ref: '#/components/schemas/AddressDto'
+        websiteURL:
+          type: string
+        officeCEO:
+          type: string
+    EmployeeRequest:
+      required:
+      - accountNumber
+      - addressDto
+      - contractType
+      - firstname
+      - lastname
+      - officeId
+      - pesel
+      - position
+      - salaryAmount
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        addressDto:
+          $ref: '#/components/schemas/AddressDto'
+        pesel:
+          type: string
+        accountNumber:
+          maxLength: 26
+          minLength: 26
+          type: string
+        salaryAmount:
+          type: number
+        contractType:
+          type: string
+          enum:
+          - EMPLOYMENT_CONTRACT
+          - MANDATE_CONTRACT
+          - SPECIFIC_TASK_CONTRACT
+          - B2B
+        position:
+          type: string
+        officeId:
+          type: string
+    EmployeeResponse:
+      required:
+      - accountNumber
+      - address
+      - contractType
+      - firstname
+      - id
+      - lastname
+      - officeId
+      - pesel
+      - position
+      - salaryAmount
+      type: object
+      properties:
+        id:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        address:
+          $ref: '#/components/schemas/AddressDto'
+        pesel:
+          type: string
+        accountNumber:
+          maxLength: 26
+          minLength: 26
+          type: string
+        salaryAmount:
+          type: number
+        contractType:
+          type: string
+          enum:
+          - EMPLOYMENT_CONTRACT
+          - MANDATE_CONTRACT
+          - SPECIFIC_TASK_CONTRACT
+          - B2B
+        position:
+          type: string
+        officeId:
+          type: string
+    ClientRequest:
+      required:
+      - birthdate
+      - email
+      - firstname
+      - lastname
+      - password
+      type: object
+      properties:
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        password:
+          maxLength: 30
+          minLength: 8
+          type: string
+        birthdate:
+          type: string
+          format: date
+    ClientResponse:
+      required:
+      - birthdate
+      - email
+      - firstname
+      - id
+      - lastname
+      type: object
+      properties:
+        id:
+          type: string
+        firstname:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        birthdate:
+          type: string
+          format: date
+    CarRequest:
+      required:
+      - bootCapacity
+      - brand
+      - carType
+      - doorNumber
+      - fuelType
+      - gearboxType
+      - model
+      - officeId
+      type: object
+      properties:
+        brand:
+          type: string
+        model:
+          type: string
+        carType:
+          type: string
+          enum:
+          - PASSENGER
+          - VAN
+          - DELIVERY
+        fuelType:
+          type: string
+          enum:
+          - DIESEL_OIL
+          - PETROL
+          - GAS
+        gearboxType:
+          type: string
+          enum:
+          - MANUAL
+          - AUTOMATIC
+        doorNumber:
+          type: string
+          enum:
+          - _3
+          - _5
+        bootCapacity:
+          type: number
+          format: double
+        officeId:
+          type: string
+    CarResponse:
+      required:
+      - bootCapacity
+      - brand
+      - carType
+      - doorNumber
+      - fuelType
+      - gearboxType
+      - id
+      - model
+      - officeId
+      type: object
+      properties:
+        id:
+          type: string
+        brand:
+          type: string
+        model:
+          type: string
+        carType:
+          type: string
+          enum:
+          - PASSENGER
+          - VAN
+          - DELIVERY
+        fuelType:
+          type: string
+          enum:
+          - DIESEL_OIL
+          - PETROL
+          - GAS
+        gearboxType:
+          type: string
+          enum:
+          - MANUAL
+          - AUTOMATIC
+        doorNumber:
+          type: string
+          enum:
+          - _3
+          - _5
+        bootCapacity:
+          type: number
+          format: double
+        officeId:
+          type: string
+    OfficeSpecification:
+      type: object
+      properties:
+        addressDto:
+          $ref: '#/components/schemas/AddressDto'
+        websiteUrl:
+          type: string
+          writeOnly: true
+        officeCeo:
+          type: string
+          writeOnly: true
+    Pageable:
+      type: object
+      properties:
+        page:
+          minimum: 0
+          type: integer
+          format: int32
+        size:
+          minimum: 1
+          type: integer
+          format: int32
+        sort:
+          type: array
+          items:
+            type: string
+    PageOfficeResponse:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfficeResponse'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        empty:
+          type: boolean
+    PageableObject:
+      type: object
+      properties:
+        offset:
+          type: integer
+          format: int64
+        sort:
+          $ref: '#/components/schemas/Sort'
+        pageSize:
+          type: integer
+          format: int32
+        pageNumber:
+          type: integer
+          format: int32
+        paged:
+          type: boolean
+        unpaged:
+          type: boolean
+    Sort:
+      type: object
+      properties:
+        empty:
+          type: boolean
+        sorted:
+          type: boolean
+        unsorted:
+          type: boolean
+    EmployeeSpecification:
+      type: object
+      properties:
+        firstname:
+          type: string
+          writeOnly: true
+        lastname:
+          type: string
+          writeOnly: true
+        addressDTO:
+          $ref: '#/components/schemas/AddressDto'
+        pesel:
+          type: string
+          writeOnly: true
+        accountNumber:
+          type: string
+          writeOnly: true
+        salaryAmount:
+          type: number
+          writeOnly: true
+        contractType:
+          type: string
+          writeOnly: true
+          enum:
+          - EMPLOYMENT_CONTRACT
+          - MANDATE_CONTRACT
+          - SPECIFIC_TASK_CONTRACT
+          - B2B
+        position:
+          type: string
+          writeOnly: true
+        officeId:
+          type: string
+          writeOnly: true
+    PageEmployeeResponse:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/EmployeeResponse'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        empty:
+          type: boolean
+    ClientSpecification:
+      type: object
+      properties:
+        firstname:
+          type: string
+          writeOnly: true
+        lastname:
+          type: string
+          writeOnly: true
+        email:
+          type: string
+          writeOnly: true
+        birthdate:
+          type: string
+          format: date
+          writeOnly: true
+    PageClientResponse:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientResponse'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        empty:
+          type: boolean
+    CarSpecification:
+      type: object
+      properties:
+        brand:
+          type: string
+          writeOnly: true
+        model:
+          type: string
+          writeOnly: true
+        carType:
+          type: string
+          writeOnly: true
+          enum:
+          - PASSENGER
+          - VAN
+          - DELIVERY
+        fuelType:
+          type: string
+          writeOnly: true
+          enum:
+          - DIESEL_OIL
+          - PETROL
+          - GAS
+        gearboxType:
+          type: string
+          writeOnly: true
+          enum:
+          - MANUAL
+          - AUTOMATIC
+        doorNumber:
+          type: string
+          writeOnly: true
+          enum:
+          - _3
+          - _5
+        bootCapacity:
+          type: number
+          format: double
+          writeOnly: true
+        officeId:
+          type: string
+          writeOnly: true
+    PageCarResponse:
+      type: object
+      properties:
+        totalElements:
+          type: integer
+          format: int64
+        totalPages:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        content:
+          type: array
+          items:
+            $ref: '#/components/schemas/CarResponse'
+        number:
+          type: integer
+          format: int32
+        sort:
+          $ref: '#/components/schemas/Sort'
+        first:
+          type: boolean
+        last:
+          type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
+        pageable:
+          $ref: '#/components/schemas/PageableObject'
+        empty:
+          type: boolean
