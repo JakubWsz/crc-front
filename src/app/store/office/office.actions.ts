@@ -15,6 +15,10 @@ export enum OfficeActionsTypes {
   addFail = "[Office/Add] Add Office Fail",
   addClear = "[Office/Add] Add Office Clear",
   addClearError = "[Office/Add] Add Office Clear Error"
+
+  // @TODO: 1. a) Dodać do enum wartości dla usuwania (analogicznie do dodawania/pobierania)
+
+  // @TODO: 2. a) Dodać do enum wartości dla edycji (analogicznie do usuwania/dodawania/pobierania)
 }
 
 //Get List
@@ -71,6 +75,19 @@ export class AddOfficeClearError implements Action {
   readonly type = OfficeActionsTypes.addClearError;
 }
 
+// @TODO: 1. b) Dodać akcje dla usuwania
+//  - DeleteOffice (w kontruktorze payload, którym będzie "id")
+//  - DeleteOfficeSuccess
+//  - DeleteOfficeFail
+//  - DeleteOfficeClear
+//  - DeleteOfficeClearError
+
+// @TODO: 2. b) Dodać akcje dla edycji
+//  - UpdateOffice (w kontruktorze payload, którym będzie "id" oraz resztę pól - interfejs podobny do dodawania - OfficeAddPayload - tylko dodatkowo jeszcze z "id" edytowanego elementu, można zrobić na to oddzielny interfejs)
+//  - UpdateOfficeSuccess
+//  - UpdateOfficeFail
+//  - UpdateOfficeClear
+//  - UpdateOfficeClearError
 
 export type OfficeActions =
   | GetListOffice
@@ -83,4 +100,6 @@ export type OfficeActions =
   | AddOfficeFail
   | AddOfficeClear
   | AddOfficeClearError;
+  // @TODO: 1. c) Dodać stworzone klasy akcji dla usuwania do eksportowanego typu
+  // @TODO: 2. c) Dodać stworzone klasy akcji dla edycji do eksportowanego typu
 

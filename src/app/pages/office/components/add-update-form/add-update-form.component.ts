@@ -71,9 +71,10 @@ export class AddUpdateFormComponent implements OnInit {
     )
       .subscribe(() => this.dialogRef.close(true))
   }
- 
+
   editOffice(): void {
     console.log(this.data)
+    // @TODO: 2. i) Wywołać metodę edycji z pliku facade i przekazać do niej obiekt w którym będzie zawarte "id" oraz reszta pól i... GOTOWE - powinno działać ;)
     this.officeService.updateOfficeRequest({
       keys: Object.keys(this.form.value),
       values: Object.values(this.form.value)

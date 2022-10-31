@@ -24,6 +24,10 @@ export class OfficeFacade {
   officeAddSuccess$ = this.store.select(selectOfficeAddSuccess)
   officeAddError$ = this.store.select(selectOfficeAddError)
 
+  // @TODO: 1. h) Stworzyć atrybuty do których przypisze się selektory wyekportowane z poprzedniego pliku (analogicznie do "dodawania" - loading, success, error)
+
+  // @TODO: 2. h) Stworzyć atrybuty do których przypisze się selektory wyekportowane z poprzedniego pliku (analogicznie do "dodawania" - loading, success, error)
+
   constructor(private store: Store<AppState>) {}
 
   public getOfficeList(): void {
@@ -33,5 +37,9 @@ export class OfficeFacade {
   public addOffice(office: OfficeAddPayload): void {
     this.store.dispatch(new AddOffice(office));
   }
+
+  // @TODO: 1. f) Dodać metodę która będzie dispatchować akcję z usuwaniem (argumentem będzie "id", będzie on przekazywany przy wywołaniu klasy, tak jak w addOffice)
+
+  // @TODO: 2. f) Dodać metodę która będzie dispatchować akcję z edycją (argumentem będzie obiekt w którym będzie zawarte "id" oraz reszta pól)
 
 }

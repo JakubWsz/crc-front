@@ -49,4 +49,11 @@ export const selectOfficeAddError = createSelector(
   (state: LoadingHandlerInterface) => state.error
 )
 
+// @TODO: 1. g) Stworzyć selektory które ze stora "wyciągną" dane wartości (analogicznie do dodawania)
+//  - stworzyć "selectOfficeDelete"
+//  - stworzyć i wyeksportować selektory dla loading, success, error
+
+// @TODO: 2. g) Stworzyć selektory które ze stora "wyciągną" dane wartości (analogicznie do dodawania)
+//  - stworzyć "selectOfficeUpdate"
+//  - stworzyć i wyeksportować selektory dla loading, success, error
 

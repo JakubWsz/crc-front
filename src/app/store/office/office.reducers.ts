@@ -108,6 +108,9 @@ export function OfficeReducers(
         }
       }
     }
+    // @TODO: 1. d) Dodać case'y dla każdej akcji usuwania (analogicznie do dodawania)
+
+    // @TODO: 2. d) Dodać case'y dla każdej akcji edycji (analogicznie do dodawania)
     default:
       return {
         ...state

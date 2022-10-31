@@ -71,6 +71,8 @@ export class TableComponent implements OnInit, OnDestroy {
     return this.createCarForm.invalid
   }
 
+  // @TODO: 1. i) Stworzyć metodę która jako argument będzie przyjmować "id" i w środku której będzie wywoływana metoda usuwania z pliku facade (będzie to możliwe dzięki wstrzyknięciu w konstruktor "private officeFacade: OfficeFacade")
+
   private getOfficeList(): void {
     this.officeService.getOfficeListRequest()
       .pipe(takeUntil(this.unsubscribe$))

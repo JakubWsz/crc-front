@@ -39,4 +39,8 @@ export class OfficeEffects {
           catchError(error => of(new AddOfficeFail(error)))
         ))
     ))
+
+  // @TODO: 1. e) Dodać effect dla usuwania (analogicznie do dodawania, w action.payload będzie przekazane "id")
+
+  // @TODO: 2. e) Dodać effect dla edycji (analogicznie do dodawania, w action.payload będzie cały obiekt w którym będzie zawarte "id" oraz reszta pól)
 }
