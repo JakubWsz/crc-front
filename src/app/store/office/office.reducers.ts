@@ -108,7 +108,55 @@ export function OfficeReducers(
         }
       }
     }
-    // @TODO: 1. d) Dodać case'y dla każdej akcji usuwania (analogicznie do dodawania)
+    case OfficeActionsTypes.delete: {
+      return {
+        ...state,
+        delete: {
+          loading: false,
+          success: true,
+          error: null
+        }
+      }
+    }
+    case OfficeActionsTypes.deleteSuccess: {
+      return {
+        ...state,
+        delete: {
+          loading: false,
+          success: true,
+          error: null
+        }
+      }
+    }
+    case OfficeActionsTypes.deleteFail: {
+      return {
+        ...state,
+        delete: {
+          loading: false,
+          success: false,
+          error: action.payload.error
+        }
+      }
+    }
+    case OfficeActionsTypes.deleteClear: {
+      return {
+        ...state,
+        add: {
+          loading: false,
+          success: false,
+          error: null
+        }
+      }
+    }
+    case OfficeActionsTypes.deleteClearError: {
+      return {
+        ...state,
+        add: {
+          ...state.add,
+          error: null,
+        }
+      }
+    }
 
     // @TODO: 2. d) Dodać case'y dla każdej akcji edycji (analogicznie do dodawania)
     default:

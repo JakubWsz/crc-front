@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OfficeService} from "../../../../store/office/office.service";
 import {OfficeInterface} from "../../../../shared/interfaces/office.interface";
-import {of, Subject, takeUntil} from "rxjs";
+import {Observable, of, Subject, takeUntil} from "rxjs";
 import {FormBuilder, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
@@ -22,18 +22,16 @@ export class TableComponent implements OnInit, OnDestroy {
     officeCeo: ['', Validators.required]
   });
 
-  officeList!: OfficeInterface[];
   displayedColumns: string[] = ['streetAddress', 'postalCode', 'cityName', 'officeCEO', 'actions'];
   unsubscribe$: Subject<boolean> = new Subject<boolean>();
+  officeList$: Observable<OfficeInterface[]> = this.officeFacade.officeListItems$
 
   constructor(private fb: FormBuilder, private officeService: OfficeService, private _snackBar: MatSnackBar,
               private dialog: MatDialog, private officeFacade: OfficeFacade) {
   }
 
   ngOnInit(): void {
-    this.getOfficeList();
-    this.officeFacade.getOfficeList();
-    this.officeFacade.officeListItems$.subscribe((items) => console.log(items))
+    this.officeFacade.getOfficeList()
   }
 
   ngOnDestroy() {
@@ -43,7 +41,6 @@ export class TableComponent implements OnInit, OnDestroy {
 
   deleteOffice(officeId: string) {
     this.officeService.deleteOfficeRequest(officeId).subscribe(() => {
-      this.getOfficeList()
       this._snackBar.open("office deleted", "OK")
     });
   }
@@ -72,14 +69,5 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   // @TODO: 1. i) Stworzyć metodę która jako argument będzie przyjmować "id" i w środku której będzie wywoływana metoda usuwania z pliku facade (będzie to możliwe dzięki wstrzyknięciu w konstruktor "private officeFacade: OfficeFacade")
-
-  private getOfficeList(): void {
-    this.officeService.getOfficeListRequest()
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((officeList: OfficeInterface[]) => {
-        this.officeService.officeList = officeList;
-        this.officeList = this.officeService.officeList
-      });
-  }
 
 }

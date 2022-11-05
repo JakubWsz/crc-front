@@ -5,9 +5,14 @@ import {AppState} from "../app.state";
 import {
   selectOfficeAddError,
   selectOfficeAddLoading,
-  selectOfficeAddSuccess, selectOfficeListError,
+  selectOfficeAddSuccess,
+  selectOfficeListError,
   selectOfficeListItems,
-  selectOfficeListLoading, selectOfficeListSuccess
+  selectOfficeListLoading,
+  selectOfficeListSuccess,
+  selectOfficeDeleteLoading,
+  selectOfficeDeleteSuccess,
+  selectOfficeDeleteError
 } from "./office.selectors";
 import {OfficeAddPayload} from "./interfaces/office-add-payload.interface";
 
@@ -28,7 +33,8 @@ export class OfficeFacade {
 
   // @TODO: 2. h) Stworzyć atrybuty do których przypisze się selektory wyekportowane z poprzedniego pliku (analogicznie do "dodawania" - loading, success, error)
 
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<AppState>) {
+  }
 
   public getOfficeList(): void {
     this.store.dispatch(new GetListOffice());

@@ -22,7 +22,7 @@ export class OfficeService {
   }
 
   public getOfficeListRequest(): Observable<OfficeInterface[]> {
-    return this.http.get<OfficeInterface[]>(`${this.apiUrl}`)
+    return this.http.get<OfficeInterface[]>(`${this.apiUrl}?page=0&size=10`)
   }
 
   public deleteOfficeRequest(id: string): Observable<string> {

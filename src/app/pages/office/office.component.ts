@@ -15,6 +15,8 @@ export class OfficeComponent implements OnInit {
   }
 
   createOffice() {
-  this.dialog.open(AddUpdateFormComponent)
+  this.dialog.open(AddUpdateFormComponent,{
+    minWidth: "400px"
+  })
   }
 }

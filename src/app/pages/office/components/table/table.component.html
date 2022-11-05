@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="officeList" class="table">
+<table mat-table [dataSource]="dataSource" *ngIf="(officeList$ | async) as dataSource" class="table">
 
   <ng-container matColumnDef="streetAddress">
     <th mat-header-cell *matHeaderCellDef> Ulica</th>
