@@ -1,6 +1,7 @@
 import {AddressDto} from "../../../shared/interfaces/addres-dto.interface";
 
-export interface OfficeAddPayload {
+export interface OfficeUpdatePayload {
+  id: string;
   addressDto: AddressDto;
   websiteUrl: string;
   officeCeo: string;

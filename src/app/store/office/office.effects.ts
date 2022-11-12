@@ -7,7 +7,7 @@ import {
   AddOfficeSuccess, DeleteOffice, DeleteOfficeFail, DeleteOfficeSuccess, GetListOffice,
   GetListOfficeFail,
   GetListOfficeSuccess,
-  OfficeActionsTypes
+  OfficeActionsTypes, UpdateOffice, UpdateOfficeFail
 } from "./office.actions";
 import {catchError, map, of, switchMap} from "rxjs";
 import {AppState} from "../app.state";
@@ -23,7 +23,6 @@ export class OfficeEffects {
       ofType(OfficeActionsTypes.getList),
       switchMap(() =>
         this.officeService.getOfficeListRequest().pipe(
-          //@ts-ignore
           map(response => new GetListOfficeSuccess(response.content)),
           catchError(error => of(new GetListOfficeFail(error)))
         ))
@@ -42,18 +41,29 @@ export class OfficeEffects {
         ))
     ))
 
-    deleteOffice$ = createEffect(() =>
+  deleteOffice$ = createEffect(() =>
     this.actions.pipe(
       ofType(OfficeActionsTypes.delete),
-      switchMap((action: DeleteOffice)=>
-      this.officeService.deleteOfficeRequest(action.payload).pipe(
-        switchMap((response)=>[
-          new DeleteOfficeSuccess(),
-          new GetListOffice()
-        ]),
-        catchError(error => of(new DeleteOfficeFail(error)))
-      ))
+      switchMap((action: DeleteOffice) =>
+        this.officeService.deleteOfficeRequest(action.payload).pipe(
+          switchMap((response) => [
+            new DeleteOfficeSuccess(),
+            new GetListOffice()
+          ]),
+          catchError(error => of(new DeleteOfficeFail(error)))
+        ))
     ))
 
-  // @TODO: 2. e) Dodać effect dla edycji (analogicznie do dodawania, w action.payload będzie cały obiekt w którym będzie zawarte "id" oraz reszta pól)
+  updateOffice$ = createEffect(() =>
+    this.actions.pipe(
+      ofType(OfficeActionsTypes.update),
+      switchMap((action: UpdateOffice) =>
+        this.officeService.updateOfficeRequest(action.payload).pipe(
+          switchMap((response) => [
+            new UpdateOffice(action.payload),
+            new GetListOffice()
+          ]),
+          catchError(error => of(new UpdateOfficeFail(error)))
+        ))
+    ))
 }

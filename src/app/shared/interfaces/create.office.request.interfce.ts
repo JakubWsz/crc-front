@@ -1,7 +1,7 @@
-import {AddressDTO} from "./addresDto.interface";
+import {AddressDto} from "./addres-dto.interface";
 
 export interface CreateOfficeRequest {
-  addressDTO: AddressDTO;
+  addressDto: AddressDto;
   websiteUrl: string;
   officeCeo: string;
 }

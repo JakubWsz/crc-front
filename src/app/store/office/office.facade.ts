@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Store} from "@ngrx/store";
-import {AddOffice, GetListOffice} from "./office.actions";
+import {AddOffice, DeleteOffice, GetListOffice, UpdateOffice} from "./office.actions";
 import {AppState} from "../app.state";
 import {
   selectOfficeAddError,
@@ -10,11 +10,19 @@ import {
   selectOfficeListItems,
   selectOfficeListLoading,
   selectOfficeListSuccess,
+  selectOfficeDelete,
   selectOfficeDeleteLoading,
   selectOfficeDeleteSuccess,
-  selectOfficeDeleteError
+  selectOfficeDeleteError,
+  selectOfficeUpdate,
+  selectOfficeUpdateLoading,
+  selectOfficeUpdateSuccess,
+  selectOfficeUpdateError
+
 } from "./office.selectors";
 import {OfficeAddPayload} from "./interfaces/office-add-payload.interface";
+import {OfficeUpdatePayload} from "./interfaces/office-update-payload.interface";
+import {of} from "rxjs";
 
 @Injectable()
 export class OfficeFacade {
@@ -29,9 +37,19 @@ export class OfficeFacade {
   officeAddSuccess$ = this.store.select(selectOfficeAddSuccess)
   officeAddError$ = this.store.select(selectOfficeAddError)
 
-  // @TODO: 1. h) Stworzyć atrybuty do których przypisze się selektory wyekportowane z poprzedniego pliku (analogicznie do "dodawania" - loading, success, error)
+  //selectors delete
+  officeDelete$ = this.store.select(selectOfficeDelete)
+  officeDeleteLoading$ = this.store.select(selectOfficeDeleteLoading)
+  officeDeleteSuccess$ = this.store.select(selectOfficeDeleteSuccess)
+  officeDeleteError$ = this.store.select(selectOfficeDeleteError)
 
-  // @TODO: 2. h) Stworzyć atrybuty do których przypisze się selektory wyekportowane z poprzedniego pliku (analogicznie do "dodawania" - loading, success, error)
+
+  //selectors update
+  officeUpdate$ = this.store.select(selectOfficeUpdate)
+  officeUpdateLoading$ = this.store.select(selectOfficeDeleteLoading)
+  officeUpdateSuccess$ = this.store.select(selectOfficeDeleteSuccess)
+  officeUpdateError$ = this.store.select(selectOfficeDeleteError)
+
 
   constructor(private store: Store<AppState>) {
   }
@@ -44,8 +62,11 @@ export class OfficeFacade {
     this.store.dispatch(new AddOffice(office));
   }
 
-  // @TODO: 1. f) Dodać metodę która będzie dispatchować akcję z usuwaniem (argumentem będzie "id", będzie on przekazywany przy wywołaniu klasy, tak jak w addOffice)
+  public deleteOffice(officeId: string): void {
+    this.store.dispatch(new DeleteOffice(officeId))
+  }
 
-  // @TODO: 2. f) Dodać metodę która będzie dispatchować akcję z edycją (argumentem będzie obiekt w którym będzie zawarte "id" oraz reszta pól)
-
+  public updateOffice(office: OfficeUpdatePayload): void {
+    this.store.dispatch(new UpdateOffice(office))
+  }
 }

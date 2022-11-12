@@ -3,6 +3,7 @@ import {OfficeState} from "./office.state";
 import {createSelector} from "@ngrx/store";
 import {OfficeListInterface} from "./interfaces/office-list.interface";
 import {LoadingHandlerInterface} from "../../shared/interfaces/loading-handler.interface";
+import {OfficeUpdatePayload} from "./interfaces/office-update-payload.interface";
 
 const selectOffice = (state: AppState) => state.office
 
@@ -49,10 +50,6 @@ export const selectOfficeAddError = createSelector(
   (state: LoadingHandlerInterface) => state.error
 )
 
-// @TODO: 1. g) Stworzyć selektory które ze stora "wyciągną" dane wartości (analogicznie do dodawania)
-//  - stworzyć "selectOfficeDelete"
-//  - stworzyć i wyeksportować selektory dla loading, success, error
-
 //selectors delete
 export const selectOfficeDelete = createSelector(
   selectOffice,
@@ -74,7 +71,23 @@ export const selectOfficeDeleteError = createSelector(
   (state: LoadingHandlerInterface) => state.error
 )
 
-// @TODO: 2. g) Stworzyć selektory które ze stora "wyciągną" dane wartości (analogicznie do dodawania)
-//  - stworzyć "selectOfficeUpdate"
-//  - stworzyć i wyeksportować selektory dla loading, success, error
+export const selectOfficeUpdate = createSelector(
+  selectOffice,
+  (state: OfficeState) => state.update
+)
+
+export const selectOfficeUpdateLoading = createSelector(
+  selectOfficeUpdate,
+  (state: LoadingHandlerInterface) => state.loading
+)
+
+export const selectOfficeUpdateSuccess = createSelector(
+  selectOfficeUpdate,
+  (state: LoadingHandlerInterface) => state.success
+)
+
+export const selectOfficeUpdateError = createSelector(
+  selectOfficeUpdate,
+  (state: LoadingHandlerInterface) => state.error
+)
 

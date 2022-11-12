@@ -2,6 +2,7 @@ import {Action} from '@ngrx/store';
 import {OfficeInterface} from "../../shared/interfaces/office.interface";
 import {HttpErrorResponse} from "@angular/common/http";
 import {OfficeAddPayload} from "./interfaces/office-add-payload.interface";
+import {OfficeUpdatePayload} from "./interfaces/office-update-payload.interface";
 
 export enum OfficeActionsTypes {
   getList = "[Office/List] Get List Office",
@@ -21,7 +22,12 @@ export enum OfficeActionsTypes {
   deleteFail = "[Office/Delete] Delete Office Fail",
   deleteClear = "[Office/Delete] Delete Office Clear",
   deleteClearError = "[Office/Delete] Delete Clear Error",
-  // @TODO: 2. a) Dodać do enum wartości dla edycji (analogicznie do usuwania/dodawania/pobierania)
+
+  update = "[Office/Update] Update Office",
+  updateSuccess = "[Office/Update] Update Office Success",
+  updateFail = "[Office/Update] Update Office Fail",
+  updateClear = "[Office/Update] Update Office Clear",
+  updateClearError = "[Office/Update] Delete Clear Error",
 }
 
 //Get List
@@ -105,12 +111,31 @@ export class DeleteOfficeClearError implements Action {
   readonly type = OfficeActionsTypes.deleteClearError;
 }
 
-// @TODO: 2. b) Dodać akcje dla edycji
-//  - UpdateOffice (w kontruktorze payload, którym będzie "id" oraz resztę pól - interfejs podobny do dodawania - OfficeAddPayload - tylko dodatkowo jeszcze z "id" edytowanego elementu, można zrobić na to oddzielny interfejs)
-//  - UpdateOfficeSuccess
-//  - UpdateOfficeFail
-//  - UpdateOfficeClear
-//  - UpdateOfficeClearError
+export class UpdateOffice implements Action {
+  readonly type = OfficeActionsTypes.update;
+
+  constructor(public payload: OfficeUpdatePayload) {
+  }
+}
+
+export class UpdateOfficeSuccess implements Action {
+  readonly type = OfficeActionsTypes.updateSuccess
+}
+
+export class UpdateOfficeFail implements Action {
+  readonly type = OfficeActionsTypes.updateFail
+
+  constructor(public payload: HttpErrorResponse) {
+  }
+}
+
+export class UpdateOfficeClear implements Action {
+  readonly type = OfficeActionsTypes.updateClear;
+}
+
+export class UpdateOfficeClearError implements Action {
+  readonly type = OfficeActionsTypes.updateClearError;
+}
 
 export type OfficeActions =
   | GetListOffice
@@ -127,7 +152,9 @@ export type OfficeActions =
   | DeleteOfficeSuccess
   | DeleteOfficeFail
   | DeleteOfficeClear
-  | DeleteOfficeClearError;
-
-// @TODO: 2. c) Dodać stworzone klasy akcji dla edycji do eksportowanego typu
-
+  | DeleteOfficeClearError
+  | UpdateOffice
+  | UpdateOfficeSuccess
+  | UpdateOfficeFail
+  | UpdateOfficeClear
+  | UpdateOfficeClearError;

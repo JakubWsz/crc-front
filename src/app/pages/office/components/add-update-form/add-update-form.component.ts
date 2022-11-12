@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {OfficeService} from "../../../../store/office/office.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
@@ -7,6 +7,7 @@ import {CreateOfficeRequest} from "../../../../shared/interfaces/create.office.r
 import {OfficeFacade} from "../../../../store/office/office.facade";
 import {OfficeAddPayload} from "../../../../store/office/interfaces/office-add-payload.interface";
 import {filter, Observable} from "rxjs";
+import {OfficeUpdatePayload} from "../../../../store/office/interfaces/office-update-payload.interface";
 
 @Component({
   selector: 'app-add-update-form',
@@ -15,7 +16,7 @@ import {filter, Observable} from "rxjs";
 })
 export class AddUpdateFormComponent implements OnInit {
 
-  form = this.fb.group({
+  form: FormGroup = this.fb.group({
     streetAddress: ['', Validators.required],
     postalCode: ['', Validators.required],
     cityName: ['', Validators.required],
@@ -26,16 +27,14 @@ export class AddUpdateFormComponent implements OnInit {
   submitOffice = `${this.isEdit ? "Edytuj" : "Dodaj"} biuro`;
   clean = 'Wyczyść';
 
-  carAddSuccess$ = this.officeFacade.officeAddSuccess$;
-  carAddLoading$ = this.officeFacade.officeAddLoading$;
+  officeAddSuccess$ = this.officeFacade.officeAddSuccess$;
+  officeAddLoading$ = this.officeFacade.officeAddLoading$;
+  officeUpdateSuccess$ = this.officeFacade.officeUpdateSuccess$;
+  officeDeleteSuccess$ = this.officeFacade.officeDeleteSuccess$;
 
   constructor(private fb: FormBuilder, private officeService: OfficeService, private _snackBar: MatSnackBar,
               @Inject(MAT_DIALOG_DATA) private data: any, private officeFacade: OfficeFacade,
               private dialogRef: MatDialogRef<AddUpdateFormComponent>) {
-  }
-
-  get isEdit(): boolean {
-    return this.data?.isEdit
   }
 
   ngOnInit(): void {
@@ -43,17 +42,7 @@ export class AddUpdateFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    const createOfficeRequest: any = {
-      addressDto: {
-        streetAddress: this.form.get('streetAddress')?.value,
-        postalCode: this.form.get('postalCode')?.value,
-        cityName: this.form.get('cityName')?.value,
-      },
-      websiteUrl: this.form.get('websiteUrl')?.value,
-      officeCeo: this.form.get('officeCeo')?.value,
-    }
-    console.log(createOfficeRequest)
-    this.isEdit ? this.editOffice() : this.addOffice(createOfficeRequest);
+    this.isEdit ? this.updateOffice() : this.addOffice();
   }
 
   cleanForm(): void {
@@ -64,22 +53,38 @@ export class AddUpdateFormComponent implements OnInit {
     return this.form.invalid
   }
 
-  addOffice(addOffice: OfficeAddPayload): void {
-    this.officeFacade.addOffice(addOffice)
-    this.carAddSuccess$.pipe(
-      filter((carAddSuccess) => !!carAddSuccess)
-    )
-      .subscribe(() => this.dialogRef.close(true))
+  addOffice(): void {
+    this.officeFacade.addOffice({
+      addressDto: {
+        streetAddress: this.form.get('streetAddress')?.value,
+        postalCode: this.form.get('postalCode')?.value,
+        cityName: this.form.get('cityName')?.value,
+      },
+      websiteUrl: this.form.get('websiteUrl')?.value,
+      officeCeo: this.form.get('officeCeo')?.value
+    })
   }
 
-  editOffice(): void {
-    console.log(this.data)
-    // @TODO: 2. i) Wywołać metodę edycji z pliku facade i przekazać do niej obiekt w którym będzie zawarte "id" oraz reszta pól i... GOTOWE - powinno działać ;)
-    this.officeService.updateOfficeRequest({
-      keys: Object.keys(this.form.value),
-      values: Object.values(this.form.value)
-    }, {
-      id: this.data.office.id
-    }).subscribe();
+  updateOffice(): void {
+    this.officeFacade.updateOffice({
+      id: this.data.id,
+      addressDto: {
+        streetAddress: this.form.get('streetAddress')?.value,
+        postalCode: this.form.get('postalCode')?.value,
+        cityName: this.form.get('cityName')?.value,
+      },
+      websiteUrl: this.form.get('websiteUrl')?.value,
+      officeCeo: this.form.get('officeCeo')?.value
+    })
   }
+
+  deleteOffice(officeId: string): void {
+    this.officeFacade.deleteOffice(officeId)
+    this.officeDeleteSuccess$.subscribe(() => this.dialogRef.close(true))
+  }
+
+  get isEdit(): boolean {
+    return this.data?.isEdit
+  }
+
 }

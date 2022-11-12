@@ -40,26 +40,13 @@ export class TableComponent implements OnInit, OnDestroy {
   }
 
   deleteOffice(officeId: string) {
-    this.officeService.deleteOfficeRequest(officeId).subscribe(() => {
-      this._snackBar.open("office deleted", "OK")
-    });
+    this.officeFacade.deleteOffice(officeId);
   }
 
   updateOffice(office: OfficeInterface): void {
-    // this.officeService.updateOfficeRequest()
     this.dialog.open(AddUpdateFormComponent, {
-      data: {
-        isEdit: true,
-        office: {
-          id: office.id,
-          streetAddress: office.addressDTO.streetAddress,
-          postalCode: office.addressDTO.postalCode,
-          cityName: office.addressDTO.cityName,
-          websiteUrl: office.websiteURL,
-          officeCeo: office.officeCEO
-          //todo zmapować office w metodzie
-        }
-      }
+      data: this.getOfficeData(office)
+
     });
     console.log(office);
   }
@@ -68,6 +55,17 @@ export class TableComponent implements OnInit, OnDestroy {
     return this.createCarForm.invalid
   }
 
-  // @TODO: 1. i) Stworzyć metodę która jako argument będzie przyjmować "id" i w środku której będzie wywoływana metoda usuwania z pliku facade (będzie to możliwe dzięki wstrzyknięciu w konstruktor "private officeFacade: OfficeFacade")
-
+  getOfficeData(office: OfficeInterface) {
+    return {
+      isEdit: true,
+      office: {
+        id: office.id,
+        streetAddress: office.addressDto.streetAddress,
+        postalCode: office.addressDto.postalCode,
+        cityName: office.addressDto.cityName,
+        websiteUrl: office.websiteURL,
+        officeCeo: office.officeCEO
+      }
+    }
+  }
 }

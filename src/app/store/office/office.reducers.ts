@@ -113,7 +113,7 @@ export function OfficeReducers(
         ...state,
         delete: {
           loading: false,
-          success: true,
+          success: false,
           error: null
         }
       }
@@ -152,13 +152,60 @@ export function OfficeReducers(
       return {
         ...state,
         add: {
-          ...state.add,
+          ...state.delete,
           error: null,
         }
       }
     }
-
-    // @TODO: 2. d) Dodać case'y dla każdej akcji edycji (analogicznie do dodawania)
+    case OfficeActionsTypes.update: {
+      return {
+        ...state,
+        delete: {
+          loading: false,
+          success: false,
+          error: null
+        }
+      }
+    }
+    case OfficeActionsTypes.updateSuccess: {
+      return {
+        ...state,
+        delete: {
+          loading: false,
+          success: true,
+          error: null
+        }
+      }
+    }
+    case OfficeActionsTypes.updateFail: {
+      return {
+        ...state,
+        delete: {
+          loading: false,
+          success: false,
+          error: action.payload.error
+        }
+      }
+    }
+    case OfficeActionsTypes.updateClear: {
+      return {
+        ...state,
+        add: {
+          loading: false,
+          success: false,
+          error: null
+        }
+      }
+    }
+    case OfficeActionsTypes.updateClearError: {
+      return {
+        ...state,
+        add: {
+          ...state.update,
+          error: null,
+        }
+      }
+    }
     default:
       return {
         ...state

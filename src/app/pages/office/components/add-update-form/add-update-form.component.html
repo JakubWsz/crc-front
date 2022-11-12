@@ -61,8 +61,8 @@
 
   <div class="wrapper">
     <button mat-stroked-button type="button" class="btn red mr-2" (click)="cleanForm()"
-            [disabled]="(carAddLoading$ | async)">{{clean}}</button>
+            [disabled]="(officeAddLoading$ | async)">{{clean}}</button>
     <button mat-stroked-button type="submit" class="btn col s2 offset-s10"
-            [disabled]="isDisabled() || (carAddLoading$ | async)">{{submitOffice}}</button>
+            [disabled]="isDisabled() || (officeAddLoading$ | async)">{{submitOffice}}</button>
   </div>
 </form>
