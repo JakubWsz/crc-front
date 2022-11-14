@@ -63,6 +63,7 @@ export class AddUpdateFormComponent implements OnInit {
       websiteUrl: this.form.get('websiteUrl')?.value,
       officeCeo: this.form.get('officeCeo')?.value
     })
+    this.officeAddSuccess$.subscribe(() => this.dialogRef.close(true))
   }
 
   updateOffice(): void {
@@ -76,6 +77,7 @@ export class AddUpdateFormComponent implements OnInit {
       websiteUrl: this.form.get('websiteUrl')?.value,
       officeCeo: this.form.get('officeCeo')?.value
     })
+    this.officeUpdateSuccess$.subscribe(() => this.dialogRef.close(true))
   }
 
   deleteOffice(officeId: string): void {

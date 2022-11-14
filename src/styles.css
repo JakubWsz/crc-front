@@ -12,5 +12,17 @@ body {
 
 .content-card {
   margin: 50px auto;
-  max-width: 900px;
+  max-width: 1200px;
 }
+
+th.mat-header-cell,
+td.mat-cell {
+  text-align: center;
+}
+
+td.mat-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
