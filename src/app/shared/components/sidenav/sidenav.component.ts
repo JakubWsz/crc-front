@@ -20,6 +20,10 @@ export class SidenavComponent implements OnInit {
     {
       name: "biuro",
       path: "office"
+    },
+    {
+      name: "samochód",
+      path: "car"
     }
   ]
 

@@ -1,8 +1,8 @@
 import {Action} from '@ngrx/store';
-import {OfficeInterface} from "../../shared/interfaces/office.interface";
 import {HttpErrorResponse} from "@angular/common/http";
-import {OfficeAddPayload} from "./interfaces/office-add-payload.interface";
-import {OfficeUpdatePayload} from "./interfaces/office-update-payload.interface";
+import {OfficeRequest} from "../../shared/api/models/office-request";
+import {OfficeResponse} from "../../shared/api/models/office-response";
+import {UpdateOfficeRequestInterface} from "../../shared/interfaces/update-office-request.interface";
 
 export enum OfficeActionsTypes {
   getList = "[Office/List] Get List Office",
@@ -38,7 +38,7 @@ export class GetListOffice implements Action {
 export class GetListOfficeSuccess implements Action {
   readonly type = OfficeActionsTypes.getListSuccess;
 
-  constructor(public payload: OfficeInterface[]) {
+  constructor(public payload: OfficeResponse[] | undefined) {
   }
 }
 
@@ -61,7 +61,7 @@ export class GetListOfficeClearError implements Action {
 export class AddOffice implements Action {
   readonly type = OfficeActionsTypes.add;
 
-  constructor(public payload: OfficeAddPayload) {
+  constructor(public payload: OfficeRequest) {
   }
 }
 
@@ -114,7 +114,7 @@ export class DeleteOfficeClearError implements Action {
 export class UpdateOffice implements Action {
   readonly type = OfficeActionsTypes.update;
 
-  constructor(public payload: OfficeUpdatePayload) {
+  constructor(public payload: UpdateOfficeRequestInterface) {
   }
 }
 
