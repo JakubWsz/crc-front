@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {Store} from "@ngrx/store";
-import {OfficeService} from "./office.service";
+import {OfficeControllerService} from "../../shared/api/services/office-controller.service";
 import {
   AddOffice, AddOfficeFail,
   AddOfficeSuccess, DeleteOffice, DeleteOfficeFail, DeleteOfficeSuccess, GetListOffice,
@@ -9,20 +9,23 @@ import {
   GetListOfficeSuccess,
   OfficeActionsTypes, UpdateOffice, UpdateOfficeFail
 } from "./office.actions";
-import {catchError, map, of, switchMap} from "rxjs";
+import {catchError, map, of, switchMap, tap} from "rxjs";
 import {AppState} from "../app.state";
-import {error} from "@angular/compiler-cli/src/transformers/util";
 
 @Injectable()
 export class OfficeEffects {
-  constructor(private actions: Actions, private store: Store<AppState>, private officeService: OfficeService) {
+  constructor(private actions: Actions, private store: Store<AppState>,
+              private officeService: OfficeControllerService) {
   }
 
   getOfficeList$ = createEffect(() =>
     this.actions.pipe(
       ofType(OfficeActionsTypes.getList),
       switchMap(() =>
-        this.officeService.getOfficeListRequest().pipe(
+        this.officeService.getPagedOffices({
+          specification: {}, pageable: {}
+        }).pipe(
+          tap(response => console.log(response)),
           map(response => new GetListOfficeSuccess(response.content)),
           catchError(error => of(new GetListOfficeFail(error)))
         ))
@@ -32,7 +35,7 @@ export class OfficeEffects {
     this.actions.pipe(
       ofType(OfficeActionsTypes.add),
       switchMap((action: AddOffice) =>
-        this.officeService.addOfficeRequest(action.payload).pipe(
+        this.officeService.createOffice({body: action.payload}).pipe(
           switchMap((response) => [
             new AddOfficeSuccess(),
             new GetListOffice()
@@ -45,7 +48,7 @@ export class OfficeEffects {
     this.actions.pipe(
       ofType(OfficeActionsTypes.delete),
       switchMap((action: DeleteOffice) =>
-        this.officeService.deleteOfficeRequest(action.payload).pipe(
+        this.officeService.deleteOffice({id: action.payload}).pipe(
           switchMap((response) => [
             new DeleteOfficeSuccess(),
             new GetListOffice()
@@ -58,7 +61,7 @@ export class OfficeEffects {
     this.actions.pipe(
       ofType(OfficeActionsTypes.update),
       switchMap((action: UpdateOffice) =>
-        this.officeService.updateOfficeRequest(action.payload).pipe(
+        this.officeService.updateOffice({id: action.payload.id, body: action.payload.content}).pipe(
           switchMap((response) => [
             new UpdateOffice(action.payload),
             new GetListOffice()

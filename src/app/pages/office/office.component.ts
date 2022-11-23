@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from "@angular/material/dialog";
-import {AddUpdateFormComponent} from "./components/add-update-form/add-update-form.component";
+import {AddUpdateFormOfficeComponent} from "./components/add-update-form-office/add-update-form-office.component";
 
 @Component({
   selector: 'app-office',
@@ -15,7 +15,7 @@ export class OfficeComponent implements OnInit {
   }
 
   createOffice() {
-  this.dialog.open(AddUpdateFormComponent,{
+  this.dialog.open(AddUpdateFormOfficeComponent,{
     minWidth: "400px"
   })
   }

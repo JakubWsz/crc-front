@@ -20,9 +20,10 @@ import {
   selectOfficeUpdateError
 
 } from "./office.selectors";
-import {OfficeAddPayload} from "./interfaces/office-add-payload.interface";
-import {OfficeUpdatePayload} from "./interfaces/office-update-payload.interface";
+
 import {of} from "rxjs";
+import {UpdateOfficeRequestInterface} from "../../shared/interfaces/update-office-request.interface";
+import {OfficeRequest} from "../../shared/api/models/office-request";
 
 @Injectable()
 export class OfficeFacade {
@@ -58,7 +59,7 @@ export class OfficeFacade {
     this.store.dispatch(new GetListOffice());
   }
 
-  public addOffice(office: OfficeAddPayload): void {
+  public addOffice(office: OfficeRequest): void {
     this.store.dispatch(new AddOffice(office));
   }
 
@@ -66,7 +67,7 @@ export class OfficeFacade {
     this.store.dispatch(new DeleteOffice(officeId))
   }
 
-  public updateOffice(office: OfficeUpdatePayload): void {
+  public updateOffice(office: UpdateOfficeRequestInterface): void {
     this.store.dispatch(new UpdateOffice(office))
   }
 }

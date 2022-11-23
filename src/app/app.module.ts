@@ -19,9 +19,13 @@ import {AppRoutingModule} from "./app-routing.module";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatCardModule} from '@angular/material/card';
-import {TableComponent} from './pages/office/components/table/table.component';
+import {TableOfficeComponent} from './pages/office/components/table-office/table-office.component';
+import {TableCarComponent} from './pages/car/components/table-car/table-car.component';
 import {MatTableModule} from "@angular/material/table";
-import {AddUpdateFormComponent} from './pages/office/components/add-update-form/add-update-form.component';
+import {
+  AddUpdateFormOfficeComponent
+} from './pages/office/components/add-update-form-office/add-update-form-office.component';
+import {AddFormCarComponent} from './pages/car/components/add-form-car/add-form-car.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {ActionReducerMap, StoreModule} from '@ngrx/store'
 import {appReducers} from "./store/app.reducers";
@@ -31,6 +35,7 @@ import {OfficeEffects} from "./store/office/office.effects";
 import {StoreDevtoolsModule} from "@ngrx/store-devtools";
 import {environment} from "../environments/environment";
 import {OfficeFacade} from "./store/office/office.facade";
+import {CarComponent} from './pages/car/car.component';
 
 @NgModule({
   declarations: [
@@ -38,8 +43,11 @@ import {OfficeFacade} from "./store/office/office.facade";
     SidenavComponent,
     HomeComponent,
     OfficeComponent,
-    TableComponent,
-    AddUpdateFormComponent
+    TableOfficeComponent,
+    AddUpdateFormOfficeComponent,
+    CarComponent,
+    TableCarComponent,
+    AddFormCarComponent
   ],
   imports: [
     BrowserModule,
