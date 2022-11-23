@@ -1,0 +1,56 @@
+<table mat-table [dataSource]="dataSource" *ngIf="(carPage$ | async) as dataSource" class="table">
+
+  <ng-container matColumnDef="brand">
+    <th mat-header-cell *matHeaderCellDef> Marka</th>
+    <td mat-cell *matCellDef="let element"> {{element.brand}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="model">
+    <th mat-header-cell *matHeaderCellDef> Model</th>
+    <td mat-cell *matCellDef="let element"> {{element.model}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="carType">
+    <th mat-header-cell *matHeaderCellDef> Typ</th>
+    <td mat-cell *matCellDef="let element"> {{element.carType}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="carType">
+    <th mat-header-cell *matHeaderCellDef> Typ</th>
+    <td mat-cell *matCellDef="let element"> {{element.carType}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="gearboxType">
+    <th mat-header-cell *matHeaderCellDef> Skrzynia biegów</th>
+    <td mat-cell *matCellDef="let element"> {{element.gearboxType}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="doorNumber">
+    <th mat-header-cell *matHeaderCellDef> Liczba drzwi</th>
+    <td mat-cell *matCellDef="let element"> {{element.doorNumber}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="bootCapacity">
+    <th mat-header-cell *matHeaderCellDef> Bagażnik</th>
+    <td mat-cell *matCellDef="let element"> {{element.bootCapacity}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="officeId">
+    <th mat-header-cell *matHeaderCellDef> Biuro</th>
+    <td mat-cell *matCellDef="let element"> {{element.officeId}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef>Działania</th>
+    <td mat-cell *matCellDef="let element">
+      <div class="buttons-wrapper">
+        <button mat-icon-button color="warn" (click)="deleteCar(element.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

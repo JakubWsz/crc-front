@@ -1,0 +1,23 @@
+.table {
+  width: 100%;
+}
+
+.mat-column-actions {
+  width: 100px;
+}
+
+.mat-column-postalCode {
+  width: 100px;
+}
+
+.buttons-wrapper {
+  width: 100%;
+  display: flex;
+}
+
+.mat-column-streetAddress,
+.mat-column-cityName,
+.mat-column-officeCEO {
+  max-width: 100px;
+  flex-grow: 0;
+}

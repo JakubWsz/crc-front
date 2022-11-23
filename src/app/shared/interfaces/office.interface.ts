@@ -1,11 +1,11 @@
 export interface OfficeInterface {
 
   id: string;
-  "addressDTO": {
+  addressDto: {
     streetAddress: string;
-    "postalCode": string;
-    "cityName": string;
+    postalCode: string;
+    cityName: string;
   },
-  "websiteURL": string;
-  "officeCEO": string;
+  websiteURL: string;
+  officeCEO: string;
 }

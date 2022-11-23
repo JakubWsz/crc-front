@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@import "styles/bootstrap/main.min.css";
 
 html, body {
   height: 100%;
@@ -11,18 +12,17 @@ body {
 
 .content-card {
   margin: 50px auto;
-  max-width: 900px;
+  max-width: 1200px;
 }
 
-.button {
-  display: table-cell;
-  font-size: 14px;
-  margin-left: 8px;
-  min-width: 120px;
+th.mat-header-cell,
+td.mat-cell {
+  text-align: center;
 }
 
-.flex-container{
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+td.mat-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
+

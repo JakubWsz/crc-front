@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost:9093'
+ // apiUrl: 'http://localhost:9070/management-crud/'
 };
 
 /*
